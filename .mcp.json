@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "divid": {
+    "divid-planner": {
       "type": "http",
       "url": "https://mcp.divid.ai/mcp"
     }

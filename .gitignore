@@ -1,0 +1,16 @@
+# OS and editor files (never part of the plugin)
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+__MACOSX/
+*.swp
+*~
+.idea/
+.vscode/
+
+# Local-only test copies (beta .mcp.json, env files)
+*.local.json
+.mcp.beta.json
+.env
+.env.*

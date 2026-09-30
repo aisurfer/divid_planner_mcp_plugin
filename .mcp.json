@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "divid": {
+      "type": "http",
+      "url": "https://mcp.divid.ai/mcp"
+    }
+  }
+}

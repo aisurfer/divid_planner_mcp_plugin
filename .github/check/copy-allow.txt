@@ -1,0 +1,5 @@
+# Reviewed exceptions for the wording lint (copy_lint.mjs): an exact substring, or `re:<regex>`; `  # reason` after
+# two spaces. Generated from the DIVID copy and security rules; do not edit by hand.
+It doesn't give personalised investment advice  # D14 disclosure block, verbatim (14/18); a negation
+re:\b[Nn]ever (?:say|use) (?:"[^"\n]+"(?:,\s*|\s+or\s+)?)+  # a skill instruction that forbids the quoted words
+"is this advice?"  # a quoted user question the skill routes to the limits guide

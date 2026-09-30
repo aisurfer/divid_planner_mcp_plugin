@@ -1,0 +1,132 @@
+{
+  "note": "Generated from the DIVID copy and security rules; do not edit by hand.",
+  "never": [
+    "recommend",
+    "recommended",
+    "recommendation",
+    "recommendations",
+    "advisor",
+    "adviser",
+    "robo",
+    "robo-advisor",
+    "wealth manager",
+    "you should buy",
+    "you should sell",
+    "should invest in",
+    "you should invest",
+    "best stocks",
+    "top picks",
+    "stock tips",
+    "winners",
+    "suitable for you",
+    "appropriate for you",
+    "right for you",
+    "optimal",
+    "perfect portfolio",
+    "guaranteed",
+    "guarantee",
+    "practically guaranteed",
+    "certain",
+    "certainty",
+    "certainly",
+    "sure thing",
+    "safe bet",
+    "no-lose",
+    "for sure",
+    "surely",
+    "definitely",
+    "no doubt",
+    "risk-free",
+    "can't lose",
+    "will grow",
+    "will reach",
+    "beat the market",
+    "get rich",
+    "safe",
+    "protected",
+    "place an order",
+    "rebalance now",
+    "shares of",
+    "robinhood",
+    "schwab",
+    "fidelity",
+    "vanguard",
+    "e*trade",
+    "futures",
+    "ai-powered",
+    "act now",
+    "before it's too late",
+    "limited time",
+    "move your money into",
+    "share counts",
+    "order sizes",
+    "where to buy",
+    "financial advisor",
+    "horizon",
+    "liquid capital",
+    "free cash flow",
+    "runway",
+    "drawdown",
+    "var",
+    "allocation",
+    "deposit",
+    "p.a.",
+    "pension",
+    "levers",
+    "optimiser",
+    "optimizer",
+    "buckets",
+    "tilt",
+    "base currency",
+    "revolutionary",
+    "cutting-edge",
+    "next-level",
+    "game-changer",
+    "unlock",
+    "supercharge",
+    "empower",
+    "seamless",
+    "robust",
+    "comprehensive",
+    "leverage",
+    "professional-grade"
+  ],
+  "allowed": [
+    {
+      "source": "\\bnot financial advice\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\bisn't financial advice\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\bnot a financial adviser\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\b(?:not|aren't) guaranteed\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\bno guarantee\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\bnot a sure thing\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\bdoesn't buy or sell anything\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "\\bnot for trading or stock tips\\b",
+      "flags": "gi"
+    },
+    {
+      "source": "^\\s*trading or stock tips\\s*$",
+      "flags": "gi"
+    }
+  ]
+}

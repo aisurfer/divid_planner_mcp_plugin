@@ -73,7 +73,7 @@ Send the amount and the pay period as said. The tool converts to a monthly take-
 - The drop is one of 5%, 10%, 20% or 35% of the invested part.
 - `allowed_classes` is required the first time this topic is saved. Types: `equity_us` (S&P 500 index fund, plus any
   companies the user picks in the full questionnaire), `bonds_gov` (bond funds), `gold`. Savings, CDs and T-bills are
-  always in. Name the types in plain words, suggest the set that fits the drop the user chose (the step shows it), and
+  always in. Name the types in plain words, offer the set the step preselects for the drop the user chose, and
   save only what the user confirms. An empty list keeps everything in savings and T-bills.
 
 ## 6. Main goal (`goals`)

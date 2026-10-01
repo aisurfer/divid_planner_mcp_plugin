@@ -7,6 +7,8 @@ description: "Turn \"what if we…\" questions into DIVID Planner changes, compa
 
 If the DIVID Planner connector is not connected, ask the user to connect it first.
 
+If you haven't said it yet in this conversation, first say: "DIVID Planner is a planning tool that uses AI (Claude) and a simulation model. It's not financial advice, and you make your own decisions."
+
 Use this skill when the user asks "what if…" about a plan they have built: spending less, earning more, a bigger cushion, a smaller or later goal, calmer or bolder investing, more in CDs, adding or taking out savings, or leaving a fund out.
 
 ## 1. Find the plan
@@ -37,7 +39,7 @@ Call `try_what_if` with the run id and the change. Quick changes (`levers`) take
 | "What if I left out gold / a fund / a company?" | `edits.excluded_tickers`: the tickers, as `search_instruments` or the result names them |
 
 - Try one change at a time, unless the user asks for a combination; then send them together in one call.
-- Plan months: the plan's month 1 is the month after the market data date. Say calendar months back ("by Jun 2027"), never the plan month number.
+- Plan months: the plan's month 1 is the month after the market data date; the tool data puts the calendar month next to each one (`month_label`). Say calendar months back ("by Jun 2027"), never the plan month number.
 - If the reply says it is still working, call `try_what_if` again with the same run id and the same change.
 - If the change isn't in the table (a new planned cost, a new goal type, different pay periods, taxes), say the quick what-if can't test it. Offer a new version of the plan instead: `start_plan` with `clone_from_plan_id` (or `clone_from_draft_id`), change that topic with `save_plan_answers`, then `run_plan`. The original plan stays as it is.
 - Debts aren't modelled yet: don't turn a debt question into a change. You may say paying down high-interest debt first is a common approach, without numbers.
@@ -49,7 +51,7 @@ The result gives the change's label and, for each goal, before → after with th
 - **With the card:** the before → after card shows the rows and has "Save this" and "Keep original". Don't read the rows back. Say in one or two sentences what the change means for the user's worry or goal, using the tool's numbers.
 - **Without a card** (Claude Code, a terminal, some apps, or when no card opens): give the label, then each goal as "before → after" with the tool's words and %, then the typical year end, then the "holds back" line if there is one. Keep it to a few short lines.
 
-Numbers come only from the tool. Give each likelihood as the tool's word and % "in the model's simulations", even at 100%, for example "Keeping at least $14,000: Very high (100%) in the model's simulations". 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language.
+Numbers come only from the tool. Give each likelihood as the tool's word and % "in the model's simulations", even at 100%, in any language and in summaries too, for example "Keeping at least $14,000: Very high (100%) in the model's simulations". 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "(almost) guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language.
 
 "The model suggests" is fine only for the user's own numbers (spending, income, cushion, CD share, ups and downs, goal amount or date). A split is "the model's split" for their inputs and limits; funds in it are examples. Never tell the user to buy, sell or hold anything, never name a company they didn't pick, and never use "recommend" or "recommendation" about anything.
 
@@ -91,6 +93,8 @@ A: Your answers and plans are saved to your DIVID account so you can come back t
 Q: Is it good for someone outside the US?
 A: It's built for US residents and US dollars. You can still try it, but taxes, products and rules where you live may differ.
 ```
+
+If X is a company and no plan includes it yet, don't say how it might fit. Say only that the user can add up to 10 companies they pick in the full questionnaire, and the model then only sizes them.
 
 ## 5. When a tool says no
 

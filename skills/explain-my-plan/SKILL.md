@@ -7,6 +7,8 @@ description: "Explain a DIVID Planner result in plain words, using only the numb
 
 If the DIVID Planner connector is not connected, ask the user to connect it first.
 
+If you haven't said it yet in this conversation, first say: "DIVID Planner is a planning tool that uses AI (Claude) and a simulation model. It's not financial advice, and you make your own decisions."
+
 Use this skill when the user asks what their plan means, wants it walked through ("explain my plan", "what does this mean for us?", "so am I OK?"), or right after a first result.
 
 ## 1. Get the facts
@@ -22,7 +24,7 @@ Every number you say must come from these tool results. Don't compute new number
 
 ## 2. Explain in four parts
 
-Keep it short: 2 to 4 plain sentences per part, dollars first, calendar months ("by Aug 2027"). Tool data may give a month as a plan month number (month 1 is the month after the market data date); say it as the calendar month and never say the number. Use the headings below or say them as sentences.
+Keep it short: 2 to 4 plain sentences per part, dollars first, calendar months ("by Aug 2027"). Tool data gives a plan month as a number with its calendar month next to it (`"month": 8, "month_label": "May 2027"`); say the calendar month and never the number. Use the headings below or say them as sentences.
 
 1. **Where you are.** Their starting point in their words: left over each month, savings they can reach, the cushion, any planned cost and its month.
 2. **What the model shows.** Each goal with its likelihood as the tool's word and %, "in the model's simulations". The typical year and a very bad year (1 in 100) in dollars. How the model splits the money, type first, as "the model's split" for their inputs and limits.
@@ -35,11 +37,11 @@ If a card is showing the result, don't read its numbers back line by line. Say w
 
 ## 3. Numbers and words
 
-- Give each likelihood as the tool's word and % "in the model's simulations", even at 100%, for example "Keeping at least $14,000: Very high (100%) in the model's simulations". 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language.
+- Give each likelihood as the tool's word and % "in the model's simulations", even at 100%, in any language and in summaries too, for example "Keeping at least $14,000: Very high (100%) in the model's simulations". 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "(almost) guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language.
 - The split: say "The model puts $12,000 (29%) in an S&P 500 index fund" with the tool's numbers, then "That's the model's split for your limits, not a list to buy." Funds are examples of a fund that tracks that part: "You can use any similar fund." Companies appear only if the user picked them; the model only sized them. Never name a company the user didn't pick.
 - Never say "safe" about money, savings or a split, even when the user does: say "kept in savings, not invested" or "lower risk". The cushion is kept in savings and never invested. A very bad year is "only 1 of 100 simulated years ends lower than this".
 - Results are estimates from past prices, not a forecast. Say it once, in one short line.
-- Never tell the user to buy, sell or hold anything. Never use "recommend" or "recommendation" about anything. For their own numbers only, you may say "one option is…" and "you decide".
+- Never tell the user to buy, sell or hold anything. Never use "recommend" or "recommendation" about anything. For their own numbers only (spending, income, cushion, CD share, ups and downs, goal amount or date), you may say "one option is…" and "you decide"; never about a fund, a company or a type of investment.
 - Debts aren't modelled yet. You may say paying down high-interest debt first is a common approach, without numbers.
 - Plain words: `references/glossary.md` has the meanings to use. Never show field names or ids to the user.
 
@@ -73,6 +75,8 @@ A: Your answers and plans are saved to your DIVID account so you can come back t
 Q: Is it good for someone outside the US?
 A: It's built for US residents and US dollars. You can still try it, but taxes, products and rules where you live may differ.
 ```
+
+If X is a company and no plan includes it yet, don't say how it might fit. Say only that the user can add up to 10 companies they pick in the full questionnaire, and the model then only sizes them.
 
 If the user asks you to pick stocks or funds for them, say the planner doesn't pick for anyone. The plan can include up to 10 companies the user picks in the full questionnaire, and the model then only sizes them.
 

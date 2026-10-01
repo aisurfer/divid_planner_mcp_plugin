@@ -84,4 +84,4 @@ If the user asks you to pick stocks or funds for them, say the planner doesn't p
 
 - Try a change and compare before and after (the `what-if-scenarios` skill).
 - Save the plan with `save_plan`, only when the user says so.
-- After a save, `get_plan_link` gives the link to the plan on divid.ai; the user opens it only if they want to.
+- To change the plan, `get_plan_step` with its `plan_id`, here in the chat. `get_plan_link` gives a read-only report on divid.ai, only when the user asks for it.

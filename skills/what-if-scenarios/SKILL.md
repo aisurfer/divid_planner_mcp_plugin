@@ -11,6 +11,8 @@ If you haven't said it yet in this conversation, first say: "DIVID Planner is a 
 
 Use this skill when the user asks "what if…" about a plan they have built: spending less, earning more, a bigger cushion, a smaller or later goal, calmer or bolder investing, more in CDs, adding or taking out savings, or leaving a fund out.
 
+If the user wants to change the plan itself or its answers ("change some parameters in my plan", "edit my answers", "my income changed") rather than try a "what if", open its answers here in the chat: `get_plan_step` with the plan's `plan_id` (from `get_planner_overview`) and stage "review", or the topic they name, then ask what to change. Never send the user to the website to change a plan.
+
 ## 1. Find the plan
 
 - Use the run id of the result in this conversation.
@@ -41,7 +43,7 @@ Call `try_what_if` with the run id and the change. Quick changes (`levers`) take
 - Try one change at a time, unless the user asks for a combination; then send them together in one call.
 - Plan months: the plan's month 1 is the month after the market data date; the tool data puts the calendar month next to each one (`month_label`). Say calendar months back ("by Jun 2027"), never the plan month number.
 - If the reply says it is still working, call `try_what_if` again with the same run id and the same change.
-- If the change isn't in the table (a new planned cost, a new goal type, different pay periods, taxes), say the quick what-if can't test it. Offer a new version of the plan instead: `start_plan` with `clone_from_plan_id` (or `clone_from_draft_id`), change that topic with `save_plan_answers`, then `run_plan`. The original plan stays as it is.
+- If the change isn't in the table (a new planned cost, a new goal type, different pay periods, taxes), say the quick what-if can't test it. Offer to change that answer in the plan instead: `get_plan_step` with the plan's `plan_id` (or its draft id) and that topic, `save_plan_answers`, then `run_plan`. The saved plan stays as it is; saving the new result keeps it too.
 - Debts aren't modelled yet: don't turn a debt question into a change. You may say paying down high-interest debt first is a common approach, without numbers.
 
 ## 3. Compare before and after
@@ -63,7 +65,7 @@ After a comparison, say: "Nothing is saved until you decide." Offer another chan
 - "Keep the original" (the plan as it was built): `save_plan` with the run id and no `what_if_id`.
 - Use a name if the user gave one. Saving the same plan and change again keeps one copy.
 - If the user saved on the card, don't save again; the card already did it.
-- After a save, `get_plan_link` gives the link to the plan on divid.ai; the user opens it only if they want to.
+- After a save, `show_plan` opens the plan again and `get_plan_step` with its `plan_id` changes its answers. `get_plan_link` gives a read-only report on divid.ai, only when the user asks for it.
 
 For "should I buy X?", "is this advice?" or "where do I buy?", call `get_planner_guide` with topic "limits" and use its answers. These are the approved answers; use them word for word:
 
@@ -98,6 +100,6 @@ If X is a company and no plan includes it yet, don't say how it might fit. Say o
 
 ## 5. When a tool says no
 
-- "Build it again" (the plan was built on older market data): offer to rebuild. For a plan built in this conversation, call `run_plan` on its draft; for a saved plan, `start_plan` with `clone_from_plan_id`, then `run_plan`. Then try the change on the new result.
+- "Build it again" (the plan was built on older market data): offer to rebuild. For a plan built in this conversation, call `run_plan` on its draft; for a saved plan, `run_plan` with the draft id the result gives; only if its answers are no longer kept, `start_plan` with `clone_from_plan_id`, then `run_plan`. Then try the change on the new result.
 - "Busy" or a limit reached: pass on the tool's words and wait time. Don't retry in a loop.
 - A value out of range: say the allowed range in plain words and ask again.

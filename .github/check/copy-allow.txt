@@ -3,3 +3,5 @@
 It doesn't give personalised investment advice  # D14 disclosure block, verbatim (14/18); a negation
 re:\b[Nn]ever (?:say|use) (?:"[^"\n]+"(?:,\s*|\s+or\s+)?)+  # a skill instruction that forbids the quoted words
 "is this advice?"  # a quoted user question the skill routes to the limits guide
+Q: Is this financial advice?  # 18 §2.3 approved-answers ```text block in the skills: a quoted user question (18 §2.1 v1.2.4, PLG-407a P-3)
+re:Q: Is this a robo-advisor\?\nA: No\. A robo-advisor manages your account\.  # 18 §2.3 approved robo-advisor Q&A in the skills' ```text block, exact text (18 §2.1 v1.2.4, PLG-407a P-3)

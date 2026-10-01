@@ -50,7 +50,7 @@ Call `try_what_if` with the run id and the change. Quick changes (`levers`) take
 
 The result gives the change's label and, for each goal, before → after with the likelihood word and %, the typical year-end amount, and, when a goal gets less likely, what holds it back.
 
-- **With the card:** the before → after card shows the rows and has "Save this" and "Keep original". Don't read the rows back. Say in one or two sentences what the change means for the user's worry or goal, using the tool's numbers.
+- **With the card:** the before → after card shows the rows and has "Use this change" (saves the plan with the change) and "Keep my plan" (saves it as it was, without the change). Don't read the rows back. Say in one or two sentences what the change means for the user's worry or goal, using the tool's numbers.
 - **Without a card** (Claude Code, a terminal, some apps, or when no card opens): give the label, then each goal as "before → after" with the tool's words and %, then the typical year end, then the "holds back" line if there is one. Keep it to a few short lines.
 
 Numbers come only from the tool. The before → after pair is the change: say it as the tool gives it ("Typical at year end: before → after"), in summaries too. Never work out a difference, a sum, a percent change or a yearly total yourself ("it adds about $1,200", "$1,200 over a year"); the tool didn't return those numbers. Give each likelihood as the tool's word and % "in the model's simulations", even at 100%, in any language and in summaries too, for example "Keeping at least $14,000: Very high (100%) in the model's simulations". 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "(almost) guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language. Don't state a result as a future fact, in any language and in summaries too ("you'll build the cushion", "you won't reach it"); give the goal with the tool's likelihood word and % instead.
@@ -61,8 +61,8 @@ After a comparison, say: "Nothing is saved until you decide." Offer another chan
 
 ## 4. Save only when the user chooses
 
-- "Save this" (keep the change): `save_plan` with the run id and the `what_if_id` of the tried change.
-- "Keep the original" (the plan as it was built): `save_plan` with the run id and no `what_if_id`.
+- "Use this change" (save the plan with the change): `save_plan` with the run id and the `what_if_id` of the tried change.
+- "Keep my plan" (the plan as it was built, without the change): `save_plan` with the run id and no `what_if_id`.
 - Use a name if the user gave one. Saving the same plan and change again keeps one copy.
 - If the user saved on the card, don't save again; the card already did it.
 - After a save, `show_plan` opens the plan again and `get_plan_step` with its `plan_id` changes its answers. `get_plan_link` gives a read-only report on divid.ai, only when the user asks for it.

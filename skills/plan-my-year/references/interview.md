@@ -57,6 +57,7 @@ Send the amount and the pay period as said. The tool converts to a monthly take-
 | "A $5,000 CD at 4.2% that ends in March" | `"deposits": [{"name": "CD", "amount": 5000, "rate": 4.2, "maturity_month": <plan month of Mar>}]` |
 | "About $1,800 in SPY" | find the ticker with `search_instruments`, then `"holdings": [{"ticker": "NYSE:SPY", "value": 1800}]` |
 | "Some stuff in a trading app, maybe $1,300" | `"holdings": [{"ticker": "OTHER", "name": "Trading app mix", "value": 1300}]` |
+| "About $2,000 in a brokerage app, some single stocks and an index fund" (no split) | `"holdings": [{"ticker": "OTHER", "name": "Brokerage app (stocks and an index fund)", "value": 2000}]`; don't ask for the split |
 
 - Leave out retirement accounts (401(k), IRA): they are not "savings you can reach" in this plan.
 - If the user doesn't know the rate, leave it out: the tool uses the latest national average and shows its date.

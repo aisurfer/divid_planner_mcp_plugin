@@ -37,6 +37,8 @@ keywords = ["://"]
   regexes = [
     '''^[$%{<]''',
     '''(?i)^(password|passwd|secret|changeme|postgres|divid|example|test|testing|local[a-z_]*|dev[a-z_]*|pass(word)?\d*|x+|\*+)$''',
+    # CD-30: fake values of test fixtures (tests/fixtures/frozen_spec/beta-fake-env.txt, `fake-…` by convention)
+    '''^fake-[a-z0-9-]+$''',
   ]
 
 [[rules]]

@@ -7,7 +7,7 @@ description: "Turn \"what if we…\" questions into DIVID Planner changes, compa
 
 If the DIVID Planner connector is not connected, ask the user to connect it first.
 
-If you haven't said it yet in this conversation, first say: "DIVID Planner is a planning tool that uses AI (Claude) and a simulation model. It's not financial advice, and you make your own decisions."
+If you haven't said it yet in this conversation, first say: "DIVID Planner is a planning tool that uses AI (Claude) and a simulation model; it's not financial advice, and you make your own decisions."
 
 Use this skill when the user asks "what if…" about a plan they have built: spending less, earning more, a bigger cushion, a smaller or later goal, calmer or bolder investing, more in CDs, adding or taking out savings, or leaving a fund out.
 
@@ -41,6 +41,7 @@ Call `try_what_if` with the run id and the change. Quick changes (`levers`) take
 | "What if I left out gold / a fund / a company?" | `edits.excluded_tickers`: the tickers, as `search_instruments` or the result names them |
 
 - Try one change at a time, unless the user asks for a combination; then send them together in one call.
+- **Two or three changes to compare** ("show me a few ways…", "what are my options?", "June or September?"): call `compare_changes` once with the run id and 2 or 3 `variants`, each with the same `levers` and `edits` as `try_what_if` (one change per variant, or a combination the user named). Never more than 3 in one call: if the user asks for more, compare the first three they named (or three changes from the table) and offer the rest after. Never start a second plan for a variant; a planned cost's other month is changed in the plan's answers (`get_plan_step`), not with a new plan.
 - Plan months: the plan's month 1 is the month after the market data date; the tool data puts the calendar month next to each one (`month_label`). Say calendar months back ("by Jun 2027"), never the plan month number.
 - If the reply says it is still working, call `try_what_if` again with the same run id and the same change.
 - If the change isn't in the table (a new planned cost, a new goal type, different pay periods, taxes), say the quick what-if can't test it. Offer to change that answer in the plan instead: `get_plan_step` with the plan's `plan_id` (or its draft id) and that topic, `save_plan_answers`, then `run_plan`. The saved plan stays as it is; saving the new result keeps it too.
@@ -48,20 +49,20 @@ Call `try_what_if` with the run id and the change. Quick changes (`levers`) take
 
 ## 3. Compare before and after
 
-The result gives the change's label and, for each goal, before → after with the likelihood word and %, the typical year-end amount, and, when a goal gets less likely, what holds it back.
+The result gives the change's label and, for each goal, before → after with the likelihood word, the typical year-end amount, and, when a goal gets less likely, what holds it back. `compare_changes` gives the same for each change, side by side.
 
-- **With the card:** the before → after card shows the rows and has "Use this change" (saves the plan with the change) and "Keep my plan" (saves it as it was, without the change). Don't read the rows back. Say in one or two sentences what the change means for the question the user came with or their goal, using the tool's numbers.
-- **Without a card** (Claude Code, a terminal, some apps, or when no card opens): give the label, then each goal as "before → after" with the tool's words and %, then the typical year end, then the "holds back" line if there is one. Keep it to a few short lines.
+- **With the card:** the before → after card shows the rows and has "Use this change" (saves the plan with the change) and "Keep my plan" (saves it as it was, without the change). Don't read the rows back. After a card: one sentence, at most 20 words, then stop. The compare card works the same way: its "Try this" opens one change on the current plan.
+- **Without a card** (Claude Code, a terminal, some apps, or when no card opens): give the label, then each goal as "before → after" with the tool's words, then the typical year end, then the "holds back" line if there is one. Keep it to a few short lines; for `compare_changes`, one short line per change.
 
-Numbers come only from the tool. The before → after pair is the change: say it as the tool gives it ("Typical at year end: before → after"), in summaries too. Never work out a difference, a sum, a percent change or a yearly total yourself ("it adds about $1,200", "$1,200 over a year"); the tool didn't return those numbers. Give each likelihood as the tool's word and % "in the model's simulations", even at 100%, in any language and in summaries too, for example "Keeping at least $14,000: Very high (100%) in the model's simulations". 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "(almost) guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language. Don't state a result as a future fact, in any language and in summaries too ("you'll build the cushion", "you won't reach it"); give the goal with the tool's likelihood word and % instead.
+Numbers come only from the tool. The before → after pair is the change: say it as the tool gives it ("Typical at year end: before → after"), in summaries too. Never work out a difference, a sum, a percent change or a yearly total yourself ("it adds about $1,200", "$1,200 over a year"); the tool didn't return those numbers. Give each likelihood as the tool's word, in any language and in summaries too, for example "Keeping at least $14,000: Very high in the model's simulations"; the % only if the user asks ("100% in the model's simulations", not a promise). 100% means the goal was met in all or nearly all simulated years; it's still a model estimate, not a promise. Never say "will", "(almost) guaranteed", "certain", "for sure", "risk-free", "safe" or "a sure thing", in any language. Don't state a result as a future fact, in any language and in summaries too ("you'll build the cushion", "you won't reach it"); give the goal with the tool's likelihood word instead.
 
 "The model suggests" is fine only for the user's own numbers (spending, income, cushion, CD share, ups and downs, goal amount or date). A split is "the model's split" for their inputs and limits; funds in it are examples. Never tell the user to buy, sell or hold anything, never name a company they didn't pick, and never use "recommend" or "recommendation" about anything.
 
-After a comparison, say: "Nothing is saved until you decide." Offer another change, or to save.
+Without a card, after a comparison, say: "Nothing is saved until you decide." Offer another change, or to save. With a card, the card says it; don't repeat it.
 
 ## 4. Save only when the user chooses
 
-- "Use this change" (save the plan with the change): `save_plan` with the run id and the `what_if_id` of the tried change.
+- "Use this change" (save the plan with the change): `save_plan` with the run id and the `what_if_id` of the tried change. After `compare_changes`, each change has its own `what_if_id`; use the one the user picked.
 - "Keep my plan" (the plan as it was built, without the change): `save_plan` with the run id and no `what_if_id`.
 - Use a name if the user gave one. Saving the same plan and change again keeps one copy.
 - If the user saved on the card, don't save again; the card already did it.

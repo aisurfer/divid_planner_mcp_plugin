@@ -94,7 +94,7 @@ Offer the full questionnaire (`start_plan` mode "full", 11 steps) only when the 
 
 ## 6. Without cards (Claude Code, terminal, some apps)
 
-A new plan works the same way: one message for what's missing, one `start_plan` call, then the same one sentence (say "the review" for "the card"); the tool's text shows the review. After the build, give the goals with the tool's likelihood words as model estimates, in a few short lines. Topic by topic, ask in text, one at a time. Offer choices as a short numbered list the user can answer with a number. Keep each message short. Read back only the numbers the tool returned. Never paste tool data, field names or ids to the user.
+A new plan works the same way: one message for what's missing, one `start_plan` call, then the same one sentence (say "the review" for "the card"); the tool's text shows the review. With no Build button, you may add: "Say go to build." After the build, give the goals with the tool's likelihood words as model estimates, in a few short lines. Topic by topic, ask in text, one at a time. Offer choices as a short numbered list the user can answer with a number. Keep each message short. Read back only the numbers the tool returned. Never paste tool data, field names or ids to the user.
 
 ## 7. Numbers and words
 

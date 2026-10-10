@@ -300,7 +300,7 @@ def check(root: Path) -> None:
                 fail(f'{label} block missing from README')
         manifest_text = (root / '.claude-plugin' / 'plugin.json').read_text('utf-8')
         for label, text in (('README.md', t), ('plugin.json', manifest_text)):
-            m = NOT_LISTED_YET.search(re.sub(r'<!--.*?-->', ' ', text, flags=re.S))
+            m = NOT_LISTED_YET.search(re.sub(r'<!--.*?-->|https://\S+', ' ', text, flags=re.S))  # URLs (UTM) are not copy
             if m:
                 fail(f'D28 "{m.group(0)}" in {label}: no directory or listing words before the plugin is listed')
         for img in re.findall(r'!\[[^\]]*\]\(([^)]+)\)', t):

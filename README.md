@@ -1,10 +1,12 @@
 # DIVID Savings & Investment Planner
 
+<!-- PLACEHOLDER(PLG-441): listing copy v2 is pending; swap in the approved README text, then delete this line. make release-check refuses a push while it is here. -->
+
 DIVID Planner helps you make a plan for the next 12 months for money you've already saved. It's for people in the US who are new to investing and care more about keeping their savings than chasing big gains.
 
 ## How it works
 
-Claude asks about six short questions: who the plan is for, your take-home pay, what you spend in a month, the savings you can reach, your cushion and comfort with risk, and your main goal. You can add a big cost you're planning, like a down payment. Type in your own words or tap the cards in the chat.
+Tell Claude about your money in your own words: your take-home pay, what you spend in a month, what you've saved and what you're saving for, like a down payment next fall. Claude fills in the plan from that and asks once for anything it still needs. A card then shows what it read and what it assumed, such as your cushion and how big a drop you could sit through. You can change any of it before the plan is built.
 
 A simulation model then tests the plan against 2,000 possible market years built from real price history. It shows how likely each goal is, how the model splits your money across the parts you allow, what a very bad year would mean in dollars, and which changes to your own numbers help most. You can try changes, save the plan and open it on divid.ai.
 

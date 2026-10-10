@@ -1,13 +1,18 @@
 {
   "name": "divid-planner",
   "displayName": "DIVID Savings & Investment Planner",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Build a one-year plan for your savings in Claude, test it against bad years, and try changes before you make them.",
   "author": {
     "name": "DIVID.AI",
     "url": "https://divid.ai"
   },
   "homepage": "https://divid.ai/planner",
+  "documentationUrl": "https://divid.ai/planner/docs",
+  "supportUrl": "https://divid.ai/planner/docs",
+  "privacyPolicyUrl": "https://divid.ai/privacy-policy",
+  "termsOfServiceUrl": "https://divid.ai/terms-and-conditions",
+  "icon": "./assets/icon.png",
   "license": "MIT",
   "keywords": [
     "investment plan",

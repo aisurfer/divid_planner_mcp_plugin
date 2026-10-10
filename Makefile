@@ -9,6 +9,7 @@
 #   make secrets    gitleaks over the full history and the working tree (.github/check/gitleaks.sh)
 #   make release-check  before every push to the tracked branch `main` (each commit there is a new directory version):
 #                   clean tree on main, origin = the plugin repo, version X.Y.Z >= 1.0.0 and above every v* tag
+#                   no placeholder marker, every https URL in README.md and plugin.json answers 200
 #                   (.github/check/release_check.py), then `make check`
 include .github/tool-versions.env
 

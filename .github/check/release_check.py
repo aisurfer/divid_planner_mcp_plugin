@@ -8,7 +8,9 @@ new version. So a push to `main` is a release, and this check refuses one that i
 - `version` in .claude-plugin/plugin.json is X.Y.Z and at least 1.0.0 (the first directory version);
 - it is above every `vX.Y.Z` tag, or its own tag `v<version>` already points at HEAD (a re-run after tagging):
   raise `version` with every release (patch: wording or skill fixes; minor: a new skill or a new tool the skills use;
-  major: a change that breaks how the plugin is used), then tag the commit `v<version>`.
+  major: a change that breaks how the plugin is used), then tag the commit `v<version>`;
+- no tracked file holds a `PLACEHOLDER(` marker (text that waits for approved copy);
+- every https:// URL in README.md and plugin.json answers 200 (the portal shows them; a 404 is a reviewer finding).
 
 Usage: python3 .github/check/release_check.py [.]   (exit 1 on any failure; `make release-check` also runs `make check`)
 """
@@ -17,6 +19,7 @@ import os
 import re
 import subprocess
 import sys
+import urllib.request
 
 TRACKED = os.environ.get('TRACKED', 'main')
 REPO = os.environ.get('REPO', 'aisurfer/divid_planner_mcp_plugin')
@@ -69,6 +72,32 @@ else:
         (ok if v > newest else fail)(f'version {version} is above the newest tag {tags[newest]}')
     if not tags:
         ok('no release tag yet: this is the first release')
+
+for path in git('ls-files').splitlines():
+    try:
+        with open(os.path.join(root, path), encoding='utf-8') as f:
+            text = f.read()
+    except (OSError, UnicodeDecodeError):
+        continue
+    if 'PLACEHOLDER(' in text and path != '.github/check/release_check.py':
+        fail(f'{path} holds a PLACEHOLDER( marker: swap in the approved text first')
+
+urls = set()
+for path in ('README.md', os.path.join('.claude-plugin', 'plugin.json')):
+    with open(os.path.join(root, path), encoding='utf-8') as f:
+        urls |= set(re.findall(r'https://[A-Za-z0-9.-]+[^\s)"`<>]*', f.read()))
+for url in sorted({u.rstrip('.,;') for u in urls}):
+    if url.rstrip('/').endswith('/mcp'):
+        continue  # the MCP endpoint answers 401 without a token, by design
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'divid-planner-release-check'})
+        with urllib.request.urlopen(req, timeout=20) as r:
+            code = r.status
+    except urllib.error.HTTPError as e:
+        code = e.code
+    except OSError as e:
+        code = str(e)
+    (ok if code == 200 else fail)(f'{url} answers {code}')
 
 print('release-check: ' + ('FAILED' if failures else 'ready'))
 sys.exit(1 if failures else 0)

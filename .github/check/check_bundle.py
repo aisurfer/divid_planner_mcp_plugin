@@ -49,6 +49,10 @@ INTERNAL_HINTS = re.compile(r'(?i)\b(divid\.team|localhost|127\.0\.0\.1|api-plan
 D14 = 'DIVID Planner is a self-directed planning and simulation tool, not a financial adviser.'
 D15 = 'The plugin connects to one remote server, `https://mcp.divid.ai/mcp`, operated by DIVID AI TECH LLC.'
 BANNED_KEYWORDS = re.compile(r'(?i)advice|advisor|adviser|retirement')
+LISTING_URLS = ('documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl')
+# DIVID rule D28: no directory or listing words in the README or the manifest until the plugin is listed (drop this rule
+# with the first release after the listing goes live). HTML comments are skipped; release_check.py guards those.
+NOT_LISTED_YET = re.compile(r'(?i)\b(director(y|ies)|marketplaces?|listed|listings?)\b')
 
 
 def is_tooling(rel: Path) -> bool:
@@ -261,6 +265,22 @@ def check(root: Path) -> None:
             fail('lint: keywords contain advice/advisor/retirement')
         if not ((root / 'LICENSE').is_file() or man.get('license')):
             fail('D2 no LICENSE file and no license field')
+        # Directory listing fields (plugins-reference "Directory listing fields"): each URL an https:// URL on our hosts,
+        # the icon an image file inside the plugin. Claude Code ignores them; the portal's Listing details reads them.
+        for field in LISTING_URLS:
+            url = man.get(field)
+            if url is None:
+                continue
+            host = re.match(r'https://([A-Za-z0-9.-]+)(/|$)', str(url))
+            if not host or host.group(1).lower() not in ALLOWED_HOSTS:
+                fail(f'listing {field} must be an https:// URL on {sorted(ALLOWED_HOSTS)}: {url!r}')
+        icon = man.get('icon')
+        if icon is not None:
+            ipath = (root / str(icon)).resolve()
+            if not str(icon).startswith('./') or root.resolve() not in ipath.parents:
+                fail(f'listing icon must be a ./ path inside the plugin: {icon!r}')
+            elif not ipath.is_file() or ipath.suffix.lower() not in IMAGE_EXT or not is_complete_image(ipath, ipath.read_bytes()):
+                fail(f'listing icon is not a complete image file: {icon!r}')
         ok(f'C1/C5/C7/D2 manifest name={name} displayName={man.get("displayName")!r} license={man.get("license")}')
     except (OSError, ValueError) as exc:
         fail(f'C plugin.json unreadable: {exc}')
@@ -278,6 +298,11 @@ def check(root: Path) -> None:
         for label, s in (('D14', D14), ('D15', D15)):
             if s not in t:
                 fail(f'{label} block missing from README')
+        manifest_text = (root / '.claude-plugin' / 'plugin.json').read_text('utf-8')
+        for label, text in (('README.md', t), ('plugin.json', manifest_text)):
+            m = NOT_LISTED_YET.search(re.sub(r'<!--.*?-->', ' ', text, flags=re.S))
+            if m:
+                fail(f'D28 "{m.group(0)}" in {label}: no directory or listing words before the plugin is listed')
         for img in re.findall(r'!\[[^\]]*\]\(([^)]+)\)', t):
             if not img.startswith('http') and not (root / img).is_file():
                 fail(f'D4 README image not found: {img}')

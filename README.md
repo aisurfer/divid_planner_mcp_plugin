@@ -17,7 +17,7 @@ A simulation model then tests the plan against 2,000 possible market years built
 Other things to ask:
 
 - "I have $42,000 in savings and want $8,000 for a car down payment by next summer. Is that realistic without touching our emergency fund?"
-- "What happens to my plan if we spend $300 less a month?"
+- "What happens to my plan if we spend 20% less on extras?"
 - "Compare two options for my plan side by side: spending $200 less a month, or adding $300 a month to my pay."
 - "Explain my plan in plain words, including what a very bad year would mean in dollars."
 

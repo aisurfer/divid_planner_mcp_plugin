@@ -87,7 +87,7 @@ Offer the full questionnaire (`start_plan` mode "full", 11 steps) only when the 
 ## 5. After the result
 
 - To make the plan more precise, offer to check one of the assumed values, one question at a time (section 3), then build it again.
-- Offer to try a change ("What if we spent $300 less a month?"). For any "what if", first load the `what-if-scenarios` skill (in Claude Code: `divid-planner:what-if-scenarios`) and follow it. Two or three changes at once go in one `compare_changes` call (at most 3), never in a second plan.
+- Offer to try a change ("What if we spent 20% less on extras?"). For any "what if", first load the `what-if-scenarios` skill (in Claude Code: `divid-planner:what-if-scenarios`) and follow it. Two or three changes at once go in one `compare_changes` call (at most 3), never in a second plan.
 - Offer to save the plan (`save_plan`). Save only when the user says so.
 - To see a saved plan again, call `show_plan`; to change it, `get_plan_step` with its `plan_id` (the card's "Change answers" does the same). The saved plan stays as it is; saving the new result keeps it too. `get_plan_link` gives a read-only report on divid.ai, only when the user asks for divid.ai, an export or the link. Never send the user to the website to change a plan.
 - If a draft stays open when the conversation is likely to end, finish with: "Your answers are saved. Next time, say 'continue my plan'." Say it once, not after every answer.

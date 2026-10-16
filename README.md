@@ -6,7 +6,7 @@ DIVID Planner helps you make a plan for the next 12 months for money you've alre
 
 Tell Claude about your money in your own words: your take-home pay, what you spend in a month, what you've saved and what you're saving for, like a down payment next fall. Claude fills in the plan from that and asks once for anything it still needs. A card then shows what it read and what it assumed, such as your cushion and how big a drop you could sit through. You can change any of it before the plan is built.
 
-A simulation model then tests the plan against 2,000 possible market years built from real price history. It shows how likely each goal is in plain words, how the model splits your money across the parts you allow, what a very bad year would mean in dollars, and which changes to your own numbers help most. You can try a change, put up to three side by side, save the plan and open it on divid.ai. The model doesn't count debts or their interest.
+A simulation model then tests the plan against 1,000+ one-year market scenarios built from real price history, with your pay, bills and surprise costs. It shows how likely each goal is in plain words, how the model splits your money across the parts you allow, what a very bad year would mean in dollars, and which changes to your own numbers help most. You can try a change, put up to three side by side, save the plan and open it on divid.ai. The model doesn't count debts or their interest.
 
 ## Get started
 

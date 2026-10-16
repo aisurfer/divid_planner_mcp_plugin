@@ -1,7 +1,7 @@
 {
   "name": "divid-planner",
   "displayName": "DIVID Savings & Investment Planner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build a one-year plan for your savings in Claude, test it against bad years, and try changes before you make them.",
   "author": {
     "name": "DIVID.AI",

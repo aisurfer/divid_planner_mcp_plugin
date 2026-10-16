@@ -8,9 +8,9 @@ Plain meanings of the words DIVID Planner uses. Use these words with the user; i
 | Savings you can reach | Checking, savings, CDs and investments outside retirement accounts |
 | Months you could cover without income | How long your savings would pay your must-pay bills if your pay stopped |
 | Cushion (emergency fund) | Months of must-pay bills kept in savings and never invested |
-| Likelihood | In how many of the 2,000 simulated years the goal is met: Very low, Low, About 50/50, High, Very high |
-| A very bad year (1 in 100) | Only 1 of 100 simulated years ends lower than this |
-| Typical year | The middle result: half the simulated years end higher, half lower |
+| Likelihood | In how many of the model's 1,000+ market scenarios the goal is met: Very low, Low, About 50/50, High, Very high |
+| A very bad year (1 in 100) | Only 1 in 100 scenarios ends lower than this |
+| Typical year | The middle result: half the scenarios end higher, half lower |
 | How the model splits your money | The mix of savings, T-bills, bond funds, index fund, gold and any companies you picked that fits your goals and limits best in the simulation |
 | Example fund | A fund that tracks one part of the split. You can use any similar fund |
 | T-bills | Short US government loans, often used for money you want to keep steady |

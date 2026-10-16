@@ -30,10 +30,12 @@ Setup help: https://divid.ai/planner/docs
 
 ## What this plugin sends and stores
 
-The plugin connects to one remote server, `https://mcp.divid.ai/mcp`, operated by DIVID AI TECH LLC. When you use it, Claude sends your planning answers (income, spending, savings, holdings and debts you choose to enter, goals, risk choices) and your plan requests to that server. DIVID stores them in your DIVID account to build and save plans. DIVID doesn't receive your Claude conversation, memory or files. Sign-in happens on `auth.divid.ai`. You can delete plans or your account any time; see https://divid.ai/privacy-policy. The plugin runs no local code and fetches nothing else.
+The plugin connects to one remote server, `https://mcp.divid.ai/mcp`, operated by DIVID AI TECH LLC. When you use it, Claude sends your planning answers (income, spending, savings, holdings and debts you choose to enter, goals, risk choices) and your plan requests to that server. DIVID stores them in your DIVID account to build and save plans. DIVID doesn't receive your Claude conversation, memory or files. Sign-in happens on `auth.divid.ai`. You can delete plans or your account any time. The plugin runs no local code and fetches nothing else.
+
+Privacy policy: https://divid.ai/privacy-policy
 
 Support: welcome@divid.ai
 
 ## Important
 
-DIVID Planner is a self-directed planning and simulation tool, not a financial adviser. It doesn't give personalised investment advice, place trades or move money. Plans are model estimates based on your inputs and historical market data, and results aren't guaranteed. Built for US residents; amounts in USD; 18+. Free during launch. Privacy: https://divid.ai/privacy-policy · Terms: https://divid.ai/terms-and-conditions
+DIVID Planner is a self-directed planning and simulation tool, not a financial adviser. It doesn't give personalised investment advice, place trades or move money. Plans are model estimates based on your inputs and historical market data, and results aren't guaranteed. Built for US residents; amounts in USD; 18+. Free during launch. Privacy policy: https://divid.ai/privacy-policy · Terms: https://divid.ai/terms-and-conditions
